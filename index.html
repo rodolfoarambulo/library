@@ -12,7 +12,41 @@
 <body>
   <div class="main">
     <h1>Library</h1>
-    <button id="btn">Add book</button>
+
+    <dialog id="bookDialog">
+      <form id="bookForm">
+        <ul>
+          <li>
+            <label for="title">Title: </label>
+            <input type="text" name="title" id="title" required>
+          </li>
+
+          <li>
+            <label for="author">Author: </label>
+            <input type="text" name="author" id="author" required>
+          </li>
+
+          <li>
+            <label for="pages">Pages: </label>
+            <input type="number" name="pages" id="pages" required>
+          </li>
+
+          <li>
+            <label for="status">Status: </label>
+            <select name="status" id="status">
+              <option value="READ" selected>READ</option>
+              <option value="NOT READ">NOT READ</option>
+            </select>
+          </li>
+          <li>
+            <button id="confirmBtn" type="submit">Confirm</button>
+          </li>
+        </ul>
+      </form>
+    </dialog>
+
+    <button id="addBookBtn">Add book</button>
+
     <table id="table">
       <thead>
         <tr>
@@ -20,7 +54,7 @@
           <th>Title</td>
           <th>Author</td>
           <th>Pages</td>
-          <th>Read?</td>
+          <th>Status</td>
         </tr>
       </thead>
       <tbody>

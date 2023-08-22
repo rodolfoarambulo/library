@@ -3,7 +3,7 @@ const myLibrary = [
     'title': 'The Last Wish',
     'author': 'Andrej Sapkowski',
     'pages': 384,
-    'read': true
+    'read': 'READ'
   }
 ];
 
@@ -19,14 +19,33 @@ function Book(title, author, pages, read) {
 
 }
 
-function addBookToLibrary(book) {
-  myLibrary.push(book);
+function addBookToLibrary() {
+  const addTitle = bookDialog.querySelector('#title').value;
+  const addAuthor = bookDialog.querySelector('#author').value;
+  const addPages = bookDialog.querySelector('#pages').value;
+  const addStatus = bookDialog.querySelector('#status').value;
+  myLibrary.push(new Book(addTitle, addAuthor, addPages, addStatus));
+  updateTable();
 }
 
-const btn = document.querySelector('#btn');
-btn.addEventListener('click', () => {
-  alert('Hello world!');
+const addBookBtn = document.getElementById('addBookBtn');
+const bookDialog = document.getElementById('bookDialog');
+const confirmBtn = bookDialog.querySelector('#confirmBtn');
+const bookForm = document.getElementById('bookForm');
+
+addBookBtn.addEventListener('click', () => {
+  bookDialog.showModal();
 });
+
+confirmBtn.addEventListener('click', (event) => {
+  if(bookForm.checkValidity()) {
+    event.preventDefault();
+    addBookToLibrary();
+    bookForm.reset();
+    bookDialog.close();
+  }
+});
+
 
 function updateTable() {
   const old_tbody = document.querySelector('#table > tbody');
@@ -53,3 +72,5 @@ function updateTable() {
 
   old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
 }
+
+updateTable();
