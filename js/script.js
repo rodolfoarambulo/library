@@ -57,17 +57,27 @@ function updateTable() {
     let number = newRow.insertCell();
     number.textContent = i + 1; // number 
 
-    let title = newRow.insertCell()
+    let title = newRow.insertCell();
     title.textContent = myLibrary[i].title;
 
-    let author = newRow.insertCell()
+    let author = newRow.insertCell();
     author.textContent = myLibrary[i].author;
 
-    let pages = newRow.insertCell()
+    let pages = newRow.insertCell();
     pages.textContent = myLibrary[i].pages;
 
-    let read = newRow.insertCell()
+    let read = newRow.insertCell();
     read.textContent = myLibrary[i].read;
+
+    let actions = newRow.insertCell();
+    let deleteBtn = document.createElement('img');
+    deleteBtn.src = 'images/delete-circle.svg';
+    deleteBtn.className = 'actionBtn';
+    deleteBtn.addEventListener('click', () => {
+      myLibrary.splice(i, 1);
+      updateTable();
+    });
+    actions.appendChild(deleteBtn);
   }
 
   old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
