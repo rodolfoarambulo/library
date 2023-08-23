@@ -31,6 +31,15 @@ tr:nth-child(odd) td {
   background-color: rgb(245, 245, 245);
 }
 
+td:last-child img {
+  width: 30px;
+}
+
+#actions {
+  display: flex;
+  gap: 10px;
+}
+
 caption {
   padding: 10px;
 }

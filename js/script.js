@@ -3,18 +3,18 @@ const myLibrary = [
     'title': 'The Last Wish',
     'author': 'Andrej Sapkowski',
     'pages': 384,
-    'read': 'READ'
+    'status': 'READ'
   }
 ];
 
-function Book(title, author, pages, read) {
+function Book(title, author, pages, status) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  this.read = read;
+  this.status = status;
 
   this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${read}`;
+    return `${title} by ${author}, ${pages} pages, ${status}`;
   }
 
 }
@@ -67,9 +67,13 @@ function updateTable() {
     pages.textContent = myLibrary[i].pages;
 
     let read = newRow.insertCell();
-    read.textContent = myLibrary[i].read;
+    read.textContent = myLibrary[i].status;
 
     let actions = newRow.insertCell();
+
+    let actionDiv = document.createElement('div');
+    actionDiv.id = 'actions';
+
     let deleteBtn = document.createElement('img');
     deleteBtn.src = 'images/delete-circle.svg';
     deleteBtn.className = 'actionBtn';
@@ -77,7 +81,24 @@ function updateTable() {
       myLibrary.splice(i, 1);
       updateTable();
     });
-    actions.appendChild(deleteBtn);
+
+    let changeBtn = document.createElement('img');
+    changeBtn.src = 'images/swap-horizontal-circle.svg';
+    changeBtn.className = 'actionBtn';
+    changeBtn.addEventListener('click', () => {
+      if (myLibrary[i].status === 'READ') {
+        myLibrary[i].status = 'NOT READ';
+        updateTable();
+      } else {
+        myLibrary[i].status = 'READ';
+        updateTable();
+      };
+    })
+
+    actionDiv.appendChild(deleteBtn);
+    actionDiv.appendChild(changeBtn);
+
+    actions.appendChild(actionDiv);
   }
 
   old_tbody.parentNode.replaceChild(new_tbody, old_tbody);
