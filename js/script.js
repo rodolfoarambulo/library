@@ -7,16 +7,17 @@ const myLibrary = [
   }
 ];
 
-function Book(title, author, pages, status) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.status = status;
+class Book {
+  constructor(title, author, pages, status) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.status = status;
 
-  this.info = function () {
-    return `${title} by ${author}, ${pages} pages, ${status}`;
+    this.info = () => {
+      return `${title} by ${author}, ${pages} pages, ${status}`;
+    }
   }
-
 }
 
 function addBookToLibrary() {
@@ -38,7 +39,7 @@ addBookBtn.addEventListener('click', () => {
 });
 
 confirmBtn.addEventListener('click', (event) => {
-  if(bookForm.checkValidity()) {
+  if (bookForm.checkValidity()) {
     event.preventDefault();
     addBookToLibrary();
     bookForm.reset();
